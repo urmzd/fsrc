@@ -7,9 +7,9 @@ Embed code directly into your markdown files with ease.
 ```yaml
 # examples/example.yml
 
-name: "Test"
+name: "Example"
 
-on: [push]
+on: [release]
 
 jobs:
   embed-example:
@@ -18,10 +18,10 @@ jobs:
       - name: "Checkout current repo"
         uses: actions/checkout@v3
       - name: "Run entrypoint script."
-        uses: ./
-        id: "embed-code" 
+        uses: urmzd/embed-md@v1.0.0
+        id: "embed-code"
         with:
-          markdown-files: "README.md" 
+          markdown-files: "README.md"
           commit-message: "chore: embed example using self"
 
 ```
