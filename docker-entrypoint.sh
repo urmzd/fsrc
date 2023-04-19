@@ -10,6 +10,7 @@ git config user.name "embed-md bot"
 git config user.email "embed-md-bot@urmzd.com"
 git config pull.rebase true
 git config rebase.autoStash true
+git config --add safe.directory /github/workspace
 
 # Embed files
 echo "Embedding files: $FILES"
