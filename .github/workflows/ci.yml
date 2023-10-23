@@ -22,9 +22,11 @@ jobs:
       - name: "update version"
         run: "npx semantic-release -d"
       - name: "Build docker image"
-        run: "docker build -t urmzd/embed-md:${VERSION} ."
+        run: >-
+          docker build -t "urmzd/embed-md:${VERSION}" .
       - name: "Run file"
-        run: "$(docker run urmzd/embed-md:${VERSION} README.md description) >> output.log"
+        run: >-
+          $(docker run "urmzd/embed-md:${VERSION}" README.md description) >> output.log"
       - name: "Verify information"
         run: "diff output.log examples/test-output.log"
 
