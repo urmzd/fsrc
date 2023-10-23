@@ -21,8 +21,6 @@ jobs:
         run: "npm ci"
       - name: "update version"
         run: "npx semantic-release -d"
-      - name: "export environment variables"
-        run: "set -a && . .env && set +a"
       - name: "Build docker image"
         run: "docker build -t urmzd/embed-md:${VERSION} ."
       - name: "Run file"
