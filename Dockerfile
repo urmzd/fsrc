@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:latest
 
 RUN npm install embedme -g
 

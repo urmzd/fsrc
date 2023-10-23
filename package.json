@@ -1,0 +1,20 @@
+{
+  "name": "embed-md",
+  "version": "1.0.0",
+  "description": "GitHub action to embed code within markdown files.",
+  "main": ".",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "semantic-release": "^22.0.5"
+  },
+  "dependencies": {
+    "@semantic-release/exec": "^6.0.3"
+  }
+}
