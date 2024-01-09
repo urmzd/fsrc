@@ -15,22 +15,11 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - name: "Checkout current repo"
+      - name: "Checkout repo"
         uses: actions/checkout@v3
-      - name: "setup node"
-        uses: actions/setup-node@v3
-        with:
-          node-version: ">=20"
-      - name: "install node"
-        run: "npm ci"
-      - name: "update version"
-        run: "npx semantic-release -d"
       - name: "Build docker image"
-        run: >-
-          docker build -t "urmzd/embed-md:${VERSION}" .
-      - name: "List files"
-        run: "ls"
-      - name: "Run file"
+        run: docker build -t "urmzd/embed-md:${VERSION}" .
+      - name: "Run action"
         run: | 
           docker run -v "$(pwd):/app" \
             -e COMMIT_MESSAGE="chore: this is an example commit message" \
