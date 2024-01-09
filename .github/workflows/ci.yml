@@ -28,8 +28,13 @@ jobs:
       - name: "Build docker image"
         run: >-
           docker build -t "urmzd/embed-md:${VERSION}" .
+      - name: "List files"
+        run: "ls"
       - name: "Run file"
-        run: >-
-          $(docker run -v "$(pwd):/app" -e COMMIT_MESSAGE="chore: this is an example commit message" -e MARKDOWN_FILES="examples/example.md" -e PUSH="false" -e COMMIT_AUTHOR="github-actions[bot] <github-actions[bot]@users.noreply.github.com>" "urmzd/embed-md:${VERSION}") >> output.log
-      - name: "Verify information"
-        run: "cat output.log"
+        run: | 
+          docker run -v "$(pwd):/app" \
+            -e COMMIT_MESSAGE="chore: this is an example commit message" \
+            -e MARKDOWN_FILES="examples/example.md" \
+            -e PUSH="false" \
+            -e COMMIT_AUTHOR="github-actions[bot] <github-actions[bot]@users.noreply.github.com>" \
+            "urmzd/embed-md:${VERSION}"
