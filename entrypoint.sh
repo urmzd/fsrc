@@ -14,6 +14,9 @@ _push_changes() {
 }
 
 main () {
+  # Ensure that /github/workspace is allowed.
+  git config --global --add safe.directory /github/workspace
+
   _embed_files
   _commit_changes
 
