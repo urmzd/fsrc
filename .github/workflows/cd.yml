@@ -35,6 +35,7 @@ jobs:
       - name: "Update references"
         run: ./scripts/update_version_refs.sh
       - name: "Update npm version"
+        continue-on-error: true
         run: |
           # bump version if needed
           npm version --force ${VERSION}
