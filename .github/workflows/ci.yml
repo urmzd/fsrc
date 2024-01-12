@@ -27,6 +27,8 @@ jobs:
         run: "npm ci"
       - name: "Update version"
         run: "npx semantic-release -d"
+      - name: Build action
+        run: docker build -t "urmzd/embed-md:${VERSION}" .
       - name: "Run action"
         id: action
         uses: ./
