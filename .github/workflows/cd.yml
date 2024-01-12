@@ -27,7 +27,7 @@ jobs:
       - name: Run action on self
         uses: ./
         with:
-          commit-message: "chore(release): ${VERSION}"
+          commit-message: "chore(release): bump to ${VERSION}"
           markdown-files: "README.md"
           push: "false"
       - name: "Update references"
@@ -37,7 +37,7 @@ jobs:
         run: |
           # bump version if needed
           npm version --force ${VERSION}
-      - name: "Do the release"
+      - name: "Tag and promote"
         run: |
           npx semantic-release
           
