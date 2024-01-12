@@ -1,27 +1,42 @@
 name: "Deployment"
 
 on:
-  # merge to master
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Integration"]  # Name of your CI workflow
+    branches: [main]
+    types:
+      - completed
 
-# promote the latest version
 jobs:
   deployment:
     runs-on: ubuntu-latest
+    # The CD job should only run if the CI was successful
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    
     steps:
       - name: Checkout repo
-        run: echo "hello"
+        uses: actions/checkout@v3
       - name: Set up node
-        run: echo "node"
+        uses: actions/setup-node@v3
+        with:
+          node-version: ">=20"
       - name: Run commit analyzer
-        run: echo "analye"
-      - name: "Update example.yml file"
-        run: "echo update"
-      - name: "Update action.yml image"
-        run: "echo update"
+        run: npx semantic-release -d
+      - name: Run action on self
+        run: |
+          docker run -v "$(pwd):/app" \
+            -e COMMIT_MESSAGE="chore: this is an example commit message" \
+            -e MARKDOWN_FILES="README.md" \
+            -e PUSH="false" \
+            -e COMMIT_AUTHOR="github-actions[bot] <github-actions[bot]@users.noreply.github.com>" \
+            "urmzd/embed-md:${VERSION}"
+      - name: "Update references"
+        run: ./scripts/update-references.sh
       - name: "Update npm version"
-        run: "echo update"
-      - name: "Push updated tag"
-        run: "echo push"
+        run: |
+          # bump version if needed
+          npm version --force ${VERSION}
+      - name: "Do the release"
+        run: |
+          npx semantic-release
+          

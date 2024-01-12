@@ -2,10 +2,12 @@ name: "Integration"
 
 on:
   pull_request:
-    types: [opened, edited]
+    types: 
+      - opened
+      - edited
   push:
     branches:
-      - "hotfix/**"
+      - master
 
 jobs:
   test:
@@ -28,7 +30,7 @@ jobs:
       - name: "Build docker image"
         run: docker build -t "urmzd/embed-md:${VERSION}" .
       - name: "Run action"
-        run: | 
+        run: |
           docker run -v "$(pwd):/app" \
             -e COMMIT_MESSAGE="chore: this is an example commit message" \
             -e MARKDOWN_FILES="examples/example.md" \
