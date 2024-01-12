@@ -22,7 +22,7 @@ inputs:
     default: "true"
 runs:
   using: "docker"
-  image: urmzd/embed-md:1.2.1
+  image: urmzd/embed-md:1.2.3
   env:
     COMMIT_AUTHOR: "${{ inputs.commit-author }}"
     COMMIT_MESSAGE: "${{ inputs.commit-message }}"
