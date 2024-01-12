@@ -33,7 +33,7 @@ jobs:
             -e COMMIT_AUTHOR="github-actions[bot] <github-actions[bot]@users.noreply.github.com>" \
             "urmzd/embed-md:${VERSION}"
       - name: "Update references"
-        run: ./scripts/update-references.sh
+        run: ./scripts/update_version_refs
       - name: "Update npm version"
         run: |
           # bump version if needed

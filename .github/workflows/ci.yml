@@ -29,6 +29,8 @@ jobs:
         run: "npx semantic-release -d"
       - name: Build action
         run: docker build -t "urmzd/embed-md:${VERSION}" .
+      - name: Update references
+        run: ./scripts/update_version_refs
       - name: "Run action"
         id: action
         uses: ./
