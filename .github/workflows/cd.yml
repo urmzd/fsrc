@@ -28,8 +28,8 @@ jobs:
         uses: ./
         with:
           commit-message: "chore(release): bump to ${VERSION}"
+          commit-push: "false"
           markdown-files: "README.md"
-          push: "false"
       - name: "Update references"
         run: ./scripts/update_version_refs.sh
       - name: "Update npm version"
@@ -40,4 +40,6 @@ jobs:
       - name: "Tag and promote"
         run: |
           npx semantic-release
-          
+      - name: "Push up updated README.md"
+        run:
+          git push
