@@ -23,7 +23,3 @@ We use Embed MD in our own CI/CD pipelines, ensuring our documentation is always
 
 ## Acknowledgements 👏
 Special thanks to the tools and people behind [embedme](https://github.com/zakhenry/embedme).
-
----
-
-This README provides a brief yet comprehensive guide for both GitHub Actions and local usage of Embed MD. For further details, refer to the [embed-md GitHub repository](https://github.com/urmzd/embed-md).
