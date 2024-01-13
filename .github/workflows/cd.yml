@@ -29,7 +29,7 @@ jobs:
       - name: Run action on self
         uses: ./
         with:
-          commit-message: "chore(release): bump to ${VERSION}"
+          commit-message: "chore(release): update README.md"
           commit-push: "false"
           markdown-files: "README.md"
       - name: "Update npm version"
