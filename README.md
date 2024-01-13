@@ -18,11 +18,14 @@ jobs:
       - name: "Checkout current repo"
         uses: actions/checkout@v3
       - name: "Run entrypoint script."
-        uses: urmzd/embed-md@v1.0.2
+        uses: urmzd/embed-md@v1.2.1
         id: "embed-code"
         with:
           markdown-files: "README.md"
           commit-message: "chore: embed example using self"
+          commit-name: Urmzd Mukhammadnaim
+          commit-email: <urmzd@noreply.com>
+          commit-push: "false"
 
 ```
 
