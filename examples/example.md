@@ -14,7 +14,7 @@ jobs:
       - name: "Checkout current repo"
         uses: actions/checkout@v3
       - name: "Run entrypoint script."
-        uses: urmzd/embed-md@v1.3.3
+        uses: urmzd/embed-md@v1.3.4
         id: "embed-code"
         with:
           markdown-files: "README.md"

@@ -30,7 +30,7 @@ inputs:
     default: "false"
 runs:
   using: "docker"
-  image: urmzd/embed-md:1.3.3
+  image: urmzd/embed-md:1.3.4
   env:
     COMMIT_NAME: "${{ inputs.commit-name }}"
     COMMIT_EMAIL: "${{ inputs.commit-email }}"
