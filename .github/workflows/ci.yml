@@ -9,12 +9,23 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
+  fmt:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo fmt --check
+
   lint:
     name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: ludeeus/action-shellcheck@2.0.0
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo clippy -- -D warnings
 
   test:
     name: Test
@@ -27,7 +38,7 @@ jobs:
 
   integrate:
     name: Integration
-    needs: [lint, test]
+    needs: [fmt, lint, test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -40,11 +51,9 @@ jobs:
       - name: Run embed-md on example
         run: ./target/release/embed-md examples/example.md
 
-      - name: Assert no drift
+      - name: Assert embeddings were updated
         run: |
-          if git diff --exit-code examples/example.md; then
-            echo "examples/example.md is up-to-date"
-          else
-            echo "examples/example.md is out of date — run embed-md and commit the result"
+          if git diff --quiet; then
+            echo "ERROR: embed-md produced no changes — expected a diff"
             exit 1
           fi

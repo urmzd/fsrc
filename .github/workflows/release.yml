@@ -73,13 +73,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - uses: dtolnay/rust-toolchain@stable
-
-      - uses: Swatinem/rust-cache@v2
-
-      - name: Build embed-md
-        run: cargo build --release
-
       - name: Download all artifacts
         uses: actions/download-artifact@v4
         with:
