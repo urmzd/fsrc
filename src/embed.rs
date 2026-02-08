@@ -77,11 +77,7 @@ pub fn process_content(content: &str, base_dir: &Path) -> String {
         let file_content = match std::fs::read_to_string(&file_path) {
             Ok(c) => c,
             Err(e) => {
-                eprintln!(
-                    "Warning: could not read {}: {}",
-                    file_path.display(),
-                    e
-                );
+                eprintln!("Warning: could not read {}: {}", file_path.display(), e);
                 continue;
             }
         };
@@ -93,7 +89,13 @@ pub fn process_content(content: &str, base_dir: &Path) -> String {
         let lang = ext_to_lang(ext);
 
         let fence = make_fence(&file_content);
-        let replacement = format!("\n{}{}\n{}\n{}\n", fence, lang, file_content.trim_end(), fence);
+        let replacement = format!(
+            "\n{}{}\n{}\n{}\n",
+            fence,
+            lang,
+            file_content.trim_end(),
+            fence
+        );
 
         result.replace_range(open_end..close_pos, &replacement);
     }

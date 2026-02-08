@@ -114,7 +114,11 @@ fn verify_mode_detects_changes() {
     let tmp_dir = std::env::temp_dir().join("embed-md-verify-test");
     std::fs::create_dir_all(&tmp_dir).unwrap();
 
-    std::fs::copy(fixtures_dir().join("example.rs"), tmp_dir.join("example.rs")).unwrap();
+    std::fs::copy(
+        fixtures_dir().join("example.rs"),
+        tmp_dir.join("example.rs"),
+    )
+    .unwrap();
     std::fs::copy(fixtures_dir().join("sample.md"), tmp_dir.join("sample.md")).unwrap();
 
     let result = process_file(&tmp_dir.join("sample.md")).unwrap();
@@ -126,7 +130,11 @@ fn dry_run_does_not_modify() {
     let tmp_dir = std::env::temp_dir().join("embed-md-dry-test");
     std::fs::create_dir_all(&tmp_dir).unwrap();
 
-    std::fs::copy(fixtures_dir().join("example.rs"), tmp_dir.join("example.rs")).unwrap();
+    std::fs::copy(
+        fixtures_dir().join("example.rs"),
+        tmp_dir.join("example.rs"),
+    )
+    .unwrap();
     let md_dst = tmp_dir.join("sample.md");
     std::fs::copy(fixtures_dir().join("sample.md"), &md_dst).unwrap();
 
@@ -148,8 +156,14 @@ fn nested_fences() {
 ";
     let result = process_content(input, fixtures_dir());
     // has_fences.md contains ```, so the outer fence must be ```` (4 backticks).
-    assert!(result.contains("````"), "outer fence should be at least 4 backticks");
-    assert!(!result.starts_with("```\n"), "outer fence should not be exactly 3 backticks");
+    assert!(
+        result.contains("````"),
+        "outer fence should be at least 4 backticks"
+    );
+    assert!(
+        !result.starts_with("```\n"),
+        "outer fence should not be exactly 3 backticks"
+    );
 }
 
 #[test]
