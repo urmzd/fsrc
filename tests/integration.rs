@@ -139,3 +139,26 @@ fn dry_run_does_not_modify() {
     let after = std::fs::read_to_string(&md_dst).unwrap();
     assert_eq!(original_content, after);
 }
+
+#[test]
+fn nested_fences() {
+    let input = "\
+<!-- embedmd src=\"has_fences.md\" -->
+<!-- /embedmd -->
+";
+    let result = process_content(input, fixtures_dir());
+    // has_fences.md contains ```, so the outer fence must be ```` (4 backticks).
+    assert!(result.contains("````"), "outer fence should be at least 4 backticks");
+    assert!(!result.starts_with("```\n"), "outer fence should not be exactly 3 backticks");
+}
+
+#[test]
+fn nested_fences_idempotent() {
+    let input = "\
+<!-- embedmd src=\"has_fences.md\" -->
+<!-- /embedmd -->
+";
+    let first = process_content(input, fixtures_dir());
+    let second = process_content(&first, fixtures_dir());
+    assert_eq!(first, second, "dynamic fence should not grow on re-runs");
+}

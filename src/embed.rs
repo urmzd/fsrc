@@ -3,6 +3,18 @@ use std::path::Path;
 
 use crate::lang::ext_to_lang;
 
+/// Return a backtick fence long enough to avoid collisions with backtick runs in `content`.
+fn make_fence(content: &str) -> String {
+    let max_run = content
+        .as_bytes()
+        .split(|&b| b != b'`')
+        .map(|run| run.len())
+        .max()
+        .unwrap_or(0);
+    let fence_len = if max_run >= 3 { max_run + 1 } else { 3 };
+    "`".repeat(fence_len)
+}
+
 /// Result of processing a single file.
 pub struct ProcessResult {
     pub original: String,
@@ -80,7 +92,8 @@ pub fn process_content(content: &str, base_dir: &Path) -> String {
             .unwrap_or("");
         let lang = ext_to_lang(ext);
 
-        let replacement = format!("\n```{}\n{}\n```\n", lang, file_content.trim_end());
+        let fence = make_fence(&file_content);
+        let replacement = format!("\n{}{}\n{}\n{}\n", fence, lang, file_content.trim_end(), fence);
 
         result.replace_range(open_end..close_pos, &replacement);
     }

@@ -13,7 +13,7 @@ In your markdown files, use the following directive pair:
 
 When the action runs, the content between the tags is replaced with a fenced code block containing the referenced file:
 
-```markdown
+````markdown
 <!-- embedmd src="path/to/file.rs" -->
 ```rust
 fn main() {
@@ -21,7 +21,7 @@ fn main() {
 }
 ```
 <!-- /embedmd -->
-```
+````
 
 - Paths are relative to the markdown file's directory.
 - The code fence language is inferred from the file extension.
