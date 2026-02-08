@@ -1,5 +1,36 @@
 # Changelog
 
+## 1.4.0 (2026-02-08)
+
+### Features
+
+- rewrite embed-md in Rust ([2a0dfb7](https://github.com/urmzd/embed-md/commit/2a0dfb710d69d941dc1d2b0eb30a3f81c152d4f0))
+
+### Bug Fixes
+
+- apply cargo fmt formatting ([b705643](https://github.com/urmzd/embed-md/commit/b705643773d7b26a80cb980741233a3ccded5299))
+- **examples**: remove embedded content to show clean embed markers ([681e522](https://github.com/urmzd/embed-md/commit/681e5226a1b7b6259cb3f2a1b6662b3583b42074))
+- **ci**: use urmzd/semantic-release action instead of calling sr directly ([341fa66](https://github.com/urmzd/embed-md/commit/341fa6695f703c2b082ffafc1d4985268067de6b))
+- **ci**: assert no drift instead of asserting changes in example ([698f7b3](https://github.com/urmzd/embed-md/commit/698f7b3888ec47e3336296ca519e22983ead9a7a))
+- use dynamic code fence length to avoid nested fence collisions ([27bdaeb](https://github.com/urmzd/embed-md/commit/27bdaeb1e03728b0b73e59a6a14bbde740b0e679))
+- **ci**: run CLI directly instead of invoking composite action ([57857ce](https://github.com/urmzd/embed-md/commit/57857ce19afe77410685cd0dbc4ae064c614c439))
+
+### Documentation
+
+- regenerate CHANGELOG.md from tag history ([8eb5480](https://github.com/urmzd/embed-md/commit/8eb5480bf6c3f8f68994578c06b7a221d0efde02))
+- update action definition, README, and examples for Rust rewrite ([4555cdc](https://github.com/urmzd/embed-md/commit/4555cdcde4cfdda1ccd530a471e07c39aa88394d))
+
+### Miscellaneous
+
+- parallelize fmt/lint/test checks and remove redundant release build ([1135edb](https://github.com/urmzd/embed-md/commit/1135edb3acb710e67c7ea9e3796186ea53334592))
+- update CI/CD and config for Rust + semantic-release ([7087c15](https://github.com/urmzd/embed-md/commit/7087c158b1065592b31a686879e0786289941b5e))
+- remove Node.js artifacts and Docker-based action ([5ff94f9](https://github.com/urmzd/embed-md/commit/5ff94f9cfe54990bf2de97618782774434a9cf09))
+
+### Contributors
+
+- @urmzd
+
+
 ## 1.3.4 (2024-01-17)
 
 ### Bug Fixes
