@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.0.0 (2026-02-09)
+
+### Breaking Changes
+
+- remove update_version_refs.sh and bump to v2 ([83abc89](https://github.com/urmzd/embed-it/commit/83abc8989950430277865fb66215e0c18275dbc1))
+
+### Contributors
+
+- @urmzd
+
+
 ## 1.5.0 (2026-02-09)
 
 ### Features
