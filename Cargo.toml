@@ -3,6 +3,8 @@ name = "embed-it"
 version = "1.4.0"
 edition = "2021"
 description = "Embed source files into any text file"
+license = "MIT"
+repository = "https://github.com/urmzd/embed-it"
 
 [dependencies]
 clap = { version = "4", features = ["derive"] }

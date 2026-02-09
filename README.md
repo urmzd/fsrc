@@ -8,31 +8,31 @@ Place opening and closing markers in your file using whatever comment style is a
 
 **Markdown / HTML:**
 ```markdown
-<!-- embed-it src="path/to/file.rs" -->
+<!-- embed-it src="path/to/config.yml" -->
 <!-- /embed-it -->
 ```
 
 **Rust / JS / Go / C:**
 ```rust
-// embed-it src="path/to/file.rs"
+// embed-it src="path/to/utils.py"
 // /embed-it
 ```
 
 **Python / Shell / YAML:**
 ```python
-# embed-it src="path/to/file.rs"
+# embed-it src="path/to/setup.sh"
 # /embed-it
 ```
 
 **CSS:**
 ```css
-/* embed-it src="path/to/file.rs" */
+/* embed-it src="path/to/theme.css" */
 /* /embed-it */
 ```
 
 **SQL / Lua:**
 ```sql
--- embed-it src="path/to/file.rs"
+-- embed-it src="path/to/schema.sql"
 -- /embed-it
 ```
 
@@ -54,11 +54,11 @@ To wrap content in markdown code fences, use the `fence` attribute:
 **Example with fencing:**
 
 ````markdown
-<!-- embed-it src="path/to/file.rs" fence="auto" -->
-```rust
-fn main() {
-    println!("Hello");
-}
+<!-- embed-it src="path/to/config.yml" fence="auto" -->
+```yaml
+server:
+  host: localhost
+  port: 8080
 ```
 <!-- /embed-it -->
 ````
@@ -91,7 +91,7 @@ fn main() {
 
 ### Basic
 
-<!-- embed-it src="examples/example.yml" fence="auto" -->
+<!-- embed-it src="example.yml" fence="auto" -->
 ```yaml
 name: "Example"
 
@@ -106,7 +106,7 @@ jobs:
       - name: "Checkout repo"
         uses: actions/checkout@v4
       - name: "Embed code into files"
-        uses: urmzd/embed-it@v1.4.0
+        uses: urmzd/embed-it@v2
         with:
           files: "README.md"
 ```
@@ -115,7 +115,7 @@ jobs:
 ### Multiple Files
 
 ```yaml
-- uses: urmzd/embed-it@v1.4.0
+- uses: urmzd/embed-it@v2
   with:
     files: "README.md docs/API.md docs/GUIDE.md"
 ```
@@ -125,7 +125,7 @@ jobs:
 Useful for CI validation -- embed the files and check for drift without committing:
 
 ```yaml
-- uses: urmzd/embed-it@v1.4.0
+- uses: urmzd/embed-it@v2
   with:
     commit-dry: "true"
     commit-push: "false"

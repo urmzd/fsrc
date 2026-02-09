@@ -95,6 +95,12 @@ jobs:
             gh release upload "$TAG" "$TARGET" --clobber
           done
 
+      - name: Publish to crates.io
+        if: steps.sr.outputs.released == 'true'
+        run: cargo publish
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+
       - name: Update floating major version tag
         if: steps.sr.outputs.released == 'true'
         run: |

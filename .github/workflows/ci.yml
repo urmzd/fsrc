@@ -48,12 +48,13 @@ jobs:
       - name: Build embed-it
         run: cargo build --release
 
-      - name: Run embed-it on example
-        run: ./target/release/embed-it examples/example.md
-
-      - name: Assert embeddings were updated
+      - name: Test binary produces correct output
         run: |
-          if git diff --quiet; then
-            echo "ERROR: embed-it produced no changes — expected a diff"
-            exit 1
-          fi
+          TMPDIR=$(mktemp -d)
+          cp tests/fixtures/sample.md "$TMPDIR/"
+          cp tests/fixtures/example.rs "$TMPDIR/"
+          ./target/release/embed-it "$TMPDIR/sample.md"
+          diff "$TMPDIR/sample.md" tests/fixtures/sample_expected.md
+
+      - name: Verify README embeddings are current
+        run: ./target/release/embed-it --verify README.md
