@@ -106,7 +106,7 @@ jobs:
       - name: "Checkout repo"
         uses: actions/checkout@v4
       - name: "Embed code into files"
-        uses: urmzd/embed-it@v2
+        uses: urmzd/embed-it@v1.5.0
         with:
           files: "README.md"
 ```

@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.5.0 (2026-02-09)
+
+### Features
+
+- add floating major-version tag and multi-comment-style integration tests ([f5c79d1](https://github.com/urmzd/embed-it/commit/f5c79d1469f50c73fcaaca1e957af903bb2b0354))
+
+### Bug Fixes
+
+- skip directives inside fenced code blocks and fix stale example paths ([c4c8ca6](https://github.com/urmzd/embed-it/commit/c4c8ca67d0319aa263eeec97ff1c42a18ccf3e71))
+- fix CI integration test, add cargo publish, clean up examples and README ([9464e35](https://github.com/urmzd/embed-it/commit/9464e35b8a0d2bafbba5dd90e22b3cfdabcd8cda))
+
+### Contributors
+
+- @urmzd
+
+
 ## 2.0.0 (unreleased)
 
 ### Breaking Changes
