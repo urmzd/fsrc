@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.0.0 (unreleased)
+
+### Breaking Changes
+
+- **Rename**: `embed-md` is now `embed-it` — the tool is no longer markdown-only.
+- **Marker syntax**: `<!-- embedmd src="..." -->` / `<!-- /embedmd -->` is now `embed-it src="..."` / `/embed-it` (comment-agnostic).
+- **Raw by default**: Content is inserted raw. Use `fence`, `fence="auto"`, or `fence="lang"` to wrap in code fences.
+- **Action input**: `markdown-files` is now `files`.
+
+### Features
+
+- **Any file type**: Embed into markdown, YAML, Python, Rust, shell scripts, or any text file.
+- **`fence` attribute**: Opt-in code fencing with auto-detection or explicit language.
+- **Comment-agnostic markers**: Works with `//`, `#`, `/* */`, `--`, `<!-- -->`, or any comment style.
+
 ## 1.4.0 (2026-02-08)
 
 ### Features

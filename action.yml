@@ -1,18 +1,18 @@
-name: "embed-md"
-description: "A GitHub Action that embeds source code into markdown files."
+name: "embed-it"
+description: "A GitHub Action that embeds source files into any text file."
 branding:
   icon: "file"
   color: "gray-dark"
 
 inputs:
-  markdown-files:
-    description: "Space-separated list of markdown files to process."
+  files:
+    description: "Space-separated list of files to process."
     required: false
     default: "README.md"
   commit-message:
-    description: "The message to associate with the commit containing the modified markdown files."
+    description: "The message to associate with the commit containing the modified files."
     required: false
-    default: "chore: embed code within markdown files"
+    default: "chore: embed source files"
   commit-name:
     description: "Define the name of the committer."
     required: false
@@ -43,7 +43,7 @@ runs:
         git config user.name "${{ inputs.commit-name }}"
         git config user.email "${{ inputs.commit-email }}"
 
-    - name: Download embed-md binary
+    - name: Download embed-it binary
       shell: bash
       env:
         GH_TOKEN: ${{ inputs.github-token }}
@@ -65,23 +65,23 @@ runs:
           *) echo "Unsupported OS: $OS"; exit 1 ;;
         esac
 
-        BINARY_NAME="embed-md-${TARGET}"
-        DOWNLOAD_URL="https://github.com/urmzd/embed-md/releases/latest/download/${BINARY_NAME}"
+        BINARY_NAME="embed-it-${TARGET}"
+        DOWNLOAD_URL="https://github.com/urmzd/embed-it/releases/latest/download/${BINARY_NAME}"
 
-        curl -sSfL "$DOWNLOAD_URL" -o /usr/local/bin/embed-md
-        chmod +x /usr/local/bin/embed-md
+        curl -sSfL "$DOWNLOAD_URL" -o /usr/local/bin/embed-it
+        chmod +x /usr/local/bin/embed-it
 
-    - name: Run embed-md
+    - name: Run embed-it
       shell: bash
       run: |
         # shellcheck disable=SC2086
-        embed-md ${{ inputs.markdown-files }}
+        embed-it ${{ inputs.files }}
 
     - name: Stage, commit, and push
       shell: bash
       run: |
         # shellcheck disable=SC2086
-        git add ${{ inputs.markdown-files }}
+        git add ${{ inputs.files }}
 
         if [ "${{ inputs.commit-dry }}" = "false" ]; then
           git diff --staged --quiet || git commit -m "${{ inputs.commit-message }}"

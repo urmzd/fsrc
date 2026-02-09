@@ -3,12 +3,12 @@ use std::process;
 
 use clap::Parser;
 
-use embed_md::embed::process_file;
+use embed_it::embed::process_file;
 
 #[derive(Parser)]
-#[command(name = "embed-md", about = "Embed source files into markdown")]
+#[command(name = "embed-it", about = "Embed source files into any text file")]
 struct Cli {
-    /// Markdown files to process
+    /// Files to process
     #[arg(required = true)]
     files: Vec<String>,
 

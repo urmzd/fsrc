@@ -54,8 +54,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: embed-md-${{ matrix.target }}
-          path: target/${{ matrix.target }}/release/embed-md
+          name: embed-it-${{ matrix.target }}
+          path: target/${{ matrix.target }}/release/embed-it
 
   release:
     name: Release
@@ -88,9 +88,17 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TAG=$(git describe --tags --abbrev=0)
-          for dir in artifacts/embed-md-*/; do
+          for dir in artifacts/embed-it-*/; do
             TARGET=$(basename "$dir")
-            cp "$dir/embed-md" "$TARGET"
+            cp "$dir/embed-it" "$TARGET"
             chmod +x "$TARGET"
             gh release upload "$TAG" "$TARGET" --clobber
           done
+
+      - name: Update floating major version tag
+        if: steps.sr.outputs.released == 'true'
+        run: |
+          TAG=$(git describe --tags --abbrev=0)
+          MAJOR=$(echo "$TAG" | grep -oE '^v[0-9]+')
+          git tag -f "$MAJOR" "$TAG"
+          git push origin "$MAJOR" --force

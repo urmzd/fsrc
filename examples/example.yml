@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: "Checkout repo"
         uses: actions/checkout@v4
-      - name: "Embed code into markdown"
-        uses: urmzd/embed-md@v1.4.0
+      - name: "Embed code into files"
+        uses: urmzd/embed-it@v1.4.0
         with:
-          markdown-files: "README.md"
+          files: "README.md"

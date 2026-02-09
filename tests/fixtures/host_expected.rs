@@ -1,0 +1,8 @@
+// Main module
+// embed-it src="example.rs" fence="auto"
+```rust
+fn main() {
+    println!("Hello, world!");
+}
+```
+// /embed-it

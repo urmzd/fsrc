@@ -13,8 +13,8 @@ FILES_TO_UPDATE=(
 
 for file in "${FILES_TO_UPDATE[@]}"; do
     if [ -f "$file" ]; then
-        sed -i "s/urmzd\/embed-md@v[^ ]*/urmzd\/embed-md@v$VERSION/g" "$file"
-        sed -i "s/urmzd\/embed-md:[^ ]*/urmzd\/embed-md:$VERSION/g" "$file"
+        sed -i "s/urmzd\/embed-it@v[^ ]*/urmzd\/embed-it@v$VERSION/g" "$file"
+        sed -i "s/urmzd\/embed-it:[^ ]*/urmzd\/embed-it:$VERSION/g" "$file"
     fi
 done
 

@@ -45,15 +45,15 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
 
-      - name: Build embed-md
+      - name: Build embed-it
         run: cargo build --release
 
-      - name: Run embed-md on example
-        run: ./target/release/embed-md examples/example.md
+      - name: Run embed-it on example
+        run: ./target/release/embed-it examples/example.md
 
       - name: Assert embeddings were updated
         run: |
           if git diff --quiet; then
-            echo "ERROR: embed-md produced no changes — expected a diff"
+            echo "ERROR: embed-it produced no changes — expected a diff"
             exit 1
           fi
