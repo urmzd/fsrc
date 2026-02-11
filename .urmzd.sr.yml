@@ -31,10 +31,3 @@ version_files:
 
 changelog:
   file: CHANGELOG.md
-
-hooks:
-  pre_release:
-    - cargo test
-    - cargo build --release
-    - ./target/release/embed-it README.md
-    - git add README.md action.yml example.yml

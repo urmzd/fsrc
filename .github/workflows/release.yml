@@ -90,6 +90,15 @@ jobs:
           cp artifacts/embed-it-aarch64-apple-darwin/embed-it release-assets/embed-it-aarch64-apple-darwin
           chmod +x release-assets/*
 
+      - name: Build embed-it
+        run: cargo build --release
+
+      - name: Update README embeddings
+        run: ./target/release/embed-it README.md
+
+      - name: Stage generated files
+        run: git add README.md action.yml example.yml
+
       - name: Release
         id: sr
         uses: urmzd/semantic-release@v0
