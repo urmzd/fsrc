@@ -1,6 +1,6 @@
 [package]
 name = "embed-it"
-version = "2.1.1"
+version = "2.1.2"
 edition = "2021"
 description = "Embed source files into any text file"
 license = "Apache-2.0"

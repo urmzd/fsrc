@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.1.2 (2026-02-11)
+
+### Bug Fixes
+
+- move pre-release steps to CI workflow, remove hooks config ([3d7f19e](https://github.com/urmzd/embed-it/commit/3d7f19e5bf0c7eb277d8d8677fbbfd9c5c3d2e6c))
+
+### Miscellaneous
+
+- update semantic-release action to v1 ([1ad2acf](https://github.com/urmzd/embed-it/commit/1ad2acfeb7b24402687184dceff8b07d986c494b))
+
+
 ## 2.1.1 (2026-02-11)
 
 ### Miscellaneous
