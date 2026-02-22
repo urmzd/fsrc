@@ -1,6 +1,6 @@
 [package]
 name = "embed-src"
-version = "2.1.4"
+version = "3.0.0"
 edition = "2021"
 description = "Embed source files into any text file"
 license = "Apache-2.0"

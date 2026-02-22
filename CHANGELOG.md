@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.0.0 (2026-02-22)
+
+### Breaking Changes
+
+- rename to embed-src ([ee9b406](https://github.com/urmzd/embed-src/commit/ee9b4069dee10dce7388f0a231dbda88f1df2535))
+
+### Miscellaneous
+
+- sync Cargo.lock ([d449f7c](https://github.com/urmzd/embed-src/commit/d449f7c071c14a3f6c75f198b4210c88055ce54e))
+
+
 ## 2.1.4 (2026-02-22)
 
 ### Miscellaneous
