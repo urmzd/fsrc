@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.1.3 (2026-02-22)
+
+### Miscellaneous
+
+- add sensitive paths to .gitignore ([accc359](https://github.com/urmzd/embed-it/commit/accc3593e1026c450104e500c87e73875e0e4c4b))
+- allow dirty working directory for cargo publish ([06d8216](https://github.com/urmzd/embed-it/commit/06d8216ea9d96f67865e5100565c31ab678b0b51))
+
+
 ## 2.1.2 (2026-02-11)
 
 ### Bug Fixes
