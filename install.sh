@@ -86,16 +86,20 @@ add_to_path() {
     if [ "$(basename "$SHELL")" = "fish" ]; then
         if ! grep -q "$install_dir" "$profile" 2>/dev/null; then
             mkdir -p "$(dirname "$profile")"
-            echo "" >> "$profile"
-            echo "# Added by embed-src installer" >> "$profile"
-            echo "set -Ux fish_user_paths $install_dir \$fish_user_paths" >> "$profile"
+            {
+                echo ""
+                echo "# Added by embed-src installer"
+                echo "set -Ux fish_user_paths $install_dir \$fish_user_paths"
+            } >> "$profile"
             echo "Added $install_dir to $profile"
             echo "Restart your shell or run: source $profile"
         fi
     elif [ -n "$profile" ] && ! grep -q "$install_dir" "$profile" 2>/dev/null; then
-        echo "" >> "$profile"
-        echo "# Added by embed-src installer" >> "$profile"
-        echo "export PATH=\"$install_dir:\$PATH\"" >> "$profile"
+        {
+            echo ""
+            echo "# Added by embed-src installer"
+            echo "export PATH=\"$install_dir:\$PATH\""
+        } >> "$profile"
         echo "Added $install_dir to $profile"
         echo "Restart your shell or run: source $profile"
     fi
