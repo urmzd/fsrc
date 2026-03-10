@@ -189,6 +189,18 @@ permissions:
 **Files not being embedded**
 Verify the file paths in `files` are relative to the repository root and that the referenced source files exist.
 
+## Agent Skill
+
+This project ships an [Agent Skill](https://github.com/vercel-labs/skills) for use with Claude Code, Cursor, and other compatible agents.
+
+**Install:**
+
+```sh
+npx skills add urmzd/embed-src
+```
+
+Once installed, use `/embed-src` to embed source files into documents using comment markers.
+
 ## Internal Use
 
 We use Embed Src in our own CI/CD pipelines, ensuring our documentation is always synchronized with the latest code.
