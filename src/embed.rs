@@ -15,6 +15,46 @@ fn make_fence(content: &str) -> String {
     "`".repeat(fence_len)
 }
 
+/// Parse a `lines` attribute value and extract the matching lines from content.
+///
+/// Supported formats (all 1-indexed):
+///   - `"5"` — single line 5
+///   - `"5-10"` — lines 5 through 10 (inclusive)
+///   - `"5-"` — line 5 through end of file
+///   - `"-10"` — line 1 through 10
+fn extract_lines(content: &str, spec: &str) -> String {
+    let lines: Vec<&str> = content.lines().collect();
+    let total = lines.len();
+
+    let (start, end) = if let Some((left, right)) = spec.split_once('-') {
+        let s = if left.is_empty() {
+            1
+        } else {
+            left.parse::<usize>().unwrap_or(1)
+        };
+        let e = if right.is_empty() {
+            total
+        } else {
+            right.parse::<usize>().unwrap_or(total)
+        };
+        (s, e)
+    } else {
+        // Single line number.
+        let n = spec.parse::<usize>().unwrap_or(1);
+        (n, n)
+    };
+
+    // Clamp to valid range.
+    let start = start.max(1).min(total + 1);
+    let end = end.max(start).min(total);
+
+    if start > total {
+        return String::new();
+    }
+
+    lines[(start - 1)..end].join("\n")
+}
+
 /// Result of processing a single file.
 pub struct ProcessResult {
     pub original: String,
@@ -47,7 +87,9 @@ pub fn process_file(path: &Path) -> Result<ProcessResult, String> {
 /// markdown code fences: `fence` or `fence="auto"` auto-detects the language
 /// from the source extension; `fence="python"` uses an explicit language tag.
 pub fn process_content(content: &str, base_dir: &Path) -> String {
-    let open_re = Regex::new(r#"embed-src\s+src="([^"]+)"(?:\s+fence(?:="([^"]*)")?)?"#).unwrap();
+    let open_re = Regex::new(r#"embed-src\s+src="([^"]+)""#).unwrap();
+    let lines_re = Regex::new(r#"lines="([^"]+)""#).unwrap();
+    let fence_re = Regex::new(r#"\bfence(?:="([^"]*)")?"#).unwrap();
     // Match /embed-src preceded by a non-word character (space, comment chars, etc.)
     // but not as part of a URL like "urmzd/embed-src".
     let close_re = Regex::new(r#"(?:^|[^a-zA-Z0-9_])/embed-src\b"#).unwrap();
@@ -89,10 +131,10 @@ pub fn process_content(content: &str, base_dir: &Path) -> String {
 
         if let Some(cap) = open_re.captures(line) {
             let src_path = cap[1].to_string();
-            let fence_attr = cap.get(2).map(|m| m.as_str().to_string());
-            // Distinguish fence (no value) vs fence="value" vs no fence at all.
-            // Group 0 full match tells us if "fence" appeared.
-            let has_fence = cap.get(0).unwrap().as_str().contains("fence");
+            let lines_attr = lines_re.captures(line).map(|c| c[1].to_string());
+            let fence_cap = fence_re.captures(line);
+            let has_fence = fence_cap.is_some();
+            let fence_attr = fence_cap.and_then(|c| c.get(1).map(|m| m.as_str().to_string()));
 
             // Emit the opening marker line.
             result.push(line.to_string());
@@ -131,6 +173,12 @@ pub fn process_content(content: &str, base_dir: &Path) -> String {
                     i = close_line_idx + 1;
                     continue;
                 }
+            };
+
+            // Apply line-range filter if specified.
+            let file_content = match &lines_attr {
+                Some(spec) => extract_lines(&file_content, spec),
+                None => file_content,
             };
 
             // Insert content: raw or fenced.
@@ -192,5 +240,38 @@ mod tests {
         let result = process_content(input, Path::new("."));
         // Should leave content unchanged when no closing tag.
         assert_eq!(result, input);
+    }
+
+    #[test]
+    fn extract_lines_single() {
+        let content = "line1\nline2\nline3\n";
+        assert_eq!(extract_lines(content, "2"), "line2");
+    }
+
+    #[test]
+    fn extract_lines_range() {
+        let content = "a\nb\nc\nd\ne\n";
+        assert_eq!(extract_lines(content, "2-4"), "b\nc\nd");
+    }
+
+    #[test]
+    fn extract_lines_open_end() {
+        let content = "a\nb\nc\nd\n";
+        assert_eq!(extract_lines(content, "3-"), "c\nd");
+    }
+
+    #[test]
+    fn extract_lines_open_start() {
+        let content = "a\nb\nc\nd\n";
+        assert_eq!(extract_lines(content, "-2"), "a\nb");
+    }
+
+    #[test]
+    fn extract_lines_out_of_bounds() {
+        let content = "a\nb\nc\n";
+        // End beyond file length: clamp to last line.
+        assert_eq!(extract_lines(content, "2-100"), "b\nc");
+        // Start beyond file length: empty.
+        assert_eq!(extract_lines(content, "100"), "");
     }
 }

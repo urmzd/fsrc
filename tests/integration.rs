@@ -229,6 +229,98 @@ fn host_yml() {
     run_host_test("host.yml", "host_expected.yml");
 }
 
+// --- Line-range selection tests ---
+
+#[test]
+fn lines_single_line() {
+    // example.rs line 2 is: `    println!("Hello, world!");`
+    let input = "\
+<!-- embed-src src=\"example.rs\" lines=\"2\" -->
+<!-- /embed-src -->
+";
+    let result = process_content(input, fixtures_dir());
+    assert!(
+        result.contains("println!"),
+        "should contain the selected line"
+    );
+    assert!(
+        !result.contains("fn main()"),
+        "should not contain other lines"
+    );
+}
+
+#[test]
+fn lines_range() {
+    // example.rs: line 1 = `fn main() {`, line 2 = `    println!(...)`, line 3 = `}`
+    let input = "\
+<!-- embed-src src=\"example.rs\" lines=\"1-2\" -->
+<!-- /embed-src -->
+";
+    let result = process_content(input, fixtures_dir());
+    assert!(result.contains("fn main()"), "should contain line 1");
+    assert!(result.contains("println!"), "should contain line 2");
+    assert!(!result.contains("}"), "should not contain line 3");
+}
+
+#[test]
+fn lines_with_fence() {
+    let input = "\
+<!-- embed-src src=\"example.rs\" lines=\"1\" fence=\"auto\" -->
+<!-- /embed-src -->
+";
+    let result = process_content(input, fixtures_dir());
+    assert!(result.contains("```rust"), "should have fence");
+    assert!(
+        result.contains("fn main() {"),
+        "should contain only line 1"
+    );
+    assert!(
+        !result.contains("println!"),
+        "should not contain other lines"
+    );
+}
+
+#[test]
+fn lines_fence_before_lines() {
+    // Attribute order: fence before lines should also work.
+    let input = "\
+<!-- embed-src src=\"example.rs\" fence=\"auto\" lines=\"1\" -->
+<!-- /embed-src -->
+";
+    let result = process_content(input, fixtures_dir());
+    assert!(result.contains("```rust"), "should have fence");
+    assert!(result.contains("fn main() {"), "should contain line 1");
+    assert!(
+        !result.contains("println!"),
+        "should not contain other lines"
+    );
+}
+
+#[test]
+fn lines_open_end() {
+    let input = "\
+<!-- embed-src src=\"example.rs\" lines=\"2-\" -->
+<!-- /embed-src -->
+";
+    let result = process_content(input, fixtures_dir());
+    assert!(
+        !result.contains("fn main()"),
+        "should not contain line 1"
+    );
+    assert!(result.contains("println!"), "should contain line 2+");
+}
+
+#[test]
+fn lines_idempotent() {
+    let input = "\
+<!-- embed-src src=\"example.rs\" lines=\"1-2\" fence=\"auto\" -->
+<!-- /embed-src -->
+";
+    let first = process_content(input, fixtures_dir());
+    let second = process_content(&first, fixtures_dir());
+    assert_eq!(first, second, "lines selection should be idempotent");
+}
+
 // --- New tests for generalized behavior ---
 
 #[test]
