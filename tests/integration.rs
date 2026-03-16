@@ -270,10 +270,7 @@ fn lines_with_fence() {
 ";
     let result = process_content(input, fixtures_dir());
     assert!(result.contains("```rust"), "should have fence");
-    assert!(
-        result.contains("fn main() {"),
-        "should contain only line 1"
-    );
+    assert!(result.contains("fn main() {"), "should contain only line 1");
     assert!(
         !result.contains("println!"),
         "should not contain other lines"
@@ -303,10 +300,7 @@ fn lines_open_end() {
 <!-- /embed-src -->
 ";
     let result = process_content(input, fixtures_dir());
-    assert!(
-        !result.contains("fn main()"),
-        "should not contain line 1"
-    );
+    assert!(!result.contains("fn main()"), "should not contain line 1");
     assert!(result.contains("println!"), "should contain line 2+");
 }
 
