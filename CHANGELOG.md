@@ -1,5 +1,28 @@
 # Changelog
 
+## 3.2.0 (2026-03-16)
+
+### Features
+
+- add line-range selection with lines attribute ([0da7736](https://github.com/urmzd/embed-src/commit/0da77365c0e71843299f0fad012864070bf1ef71))
+
+### Documentation
+
+- add AGENTS.md and agent skill for Claude Code ([2e72f73](https://github.com/urmzd/embed-src/commit/2e72f73849043e7fde438fcf1d87e5e0a68a0570))
+- add Installation section and promote CLI Usage to top-level ([4b8cb1d](https://github.com/urmzd/embed-src/commit/4b8cb1d01c72efd16aa6a0a538723464b5eea8e7))
+
+### Miscellaneous
+
+- fix formatting in integration tests ([1fd71e4](https://github.com/urmzd/embed-src/commit/1fd71e43ec0966886c721ce8abd2026cd4efd041))
+- standardize project files and README header ([26c2cc8](https://github.com/urmzd/embed-src/commit/26c2cc83536886b35942541638b7ab2d6ffd0519))
+- switch to trusted publishing for crates.io ([d415298](https://github.com/urmzd/embed-src/commit/d415298e499aa27958df090642445dad22a7ed48))
+- standardize GitHub Actions workflows ([174e47a](https://github.com/urmzd/embed-src/commit/174e47a61b68cb3063cf58b78e8f03e1fc45bf0f))
+- move crates.io publish to separate job so build is never blocked ([dd63991](https://github.com/urmzd/embed-src/commit/dd6399112a2dfb06b91478a72c022f205fa52d8d))
+- inline build matrix into release.yml, remove build.yml ([95cf94e](https://github.com/urmzd/embed-src/commit/95cf94e18d1b3a6bfb10ffc6aca0d42b4bbb0587))
+
+[Full Changelog](https://github.com/urmzd/embed-src/compare/v3.1.1...v3.2.0)
+
+
 ## 3.1.1 (2026-02-25)
 
 ### Bug Fixes
