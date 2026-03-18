@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.2.2 (2026-03-18)
+
+### Bug Fixes
+
+- **action**: install binary to ~/.local/bin instead of /usr/local/bin ([543663b](https://github.com/urmzd/embed-src/commit/543663b6a5899bb0c641758a7da042b350c90db3))
+
+[Full Changelog](https://github.com/urmzd/embed-src/compare/v3.2.1...v3.2.2)
+
+
 ## 3.2.1 (2026-03-16)
 
 ### Bug Fixes
