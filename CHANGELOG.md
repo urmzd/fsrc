@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.3.0 (2026-03-21)
+
+### Features
+
+- add styled terminal output matching sr UI standard ([86172af](https://github.com/urmzd/embed-src/commit/86172aff10968aecd5d92a1f3843b079cbf82536))
+
+[Full Changelog](https://github.com/urmzd/embed-src/compare/v3.2.2...v3.3.0)
+
+
 ## 3.2.2 (2026-03-18)
 
 ### Bug Fixes
