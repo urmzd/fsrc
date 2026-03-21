@@ -8,4 +8,6 @@ repository = "https://github.com/urmzd/embed-src"
 
 [dependencies]
 clap = { version = "4", features = ["derive"] }
+crossterm = "0.28"
+indicatif = "0.17"
 regex = "1"

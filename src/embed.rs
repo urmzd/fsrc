@@ -2,6 +2,7 @@ use regex::Regex;
 use std::path::Path;
 
 use crate::lang::ext_to_lang;
+use crate::ui;
 
 /// Return a backtick fence long enough to avoid collisions with backtick runs in `content`.
 fn make_fence(content: &str) -> String {
@@ -152,10 +153,10 @@ pub fn process_content(content: &str, base_dir: &Path) -> String {
 
             if !found_close {
                 // No closing marker: emit remaining lines unchanged.
-                eprintln!(
-                    "Warning: no closing /embed-src found for directive at line {}",
+                ui::warn(&format!(
+                    "no closing /embed-src found for directive at line {}",
                     i + 1
-                );
+                ));
                 i += 1;
                 continue;
             }
@@ -165,7 +166,7 @@ pub fn process_content(content: &str, base_dir: &Path) -> String {
             let file_content = match std::fs::read_to_string(&file_path) {
                 Ok(c) => c,
                 Err(e) => {
-                    eprintln!("Warning: could not read {}: {}", file_path.display(), e);
+                    ui::warn(&format!("could not read {}: {}", file_path.display(), e));
                     // Emit original lines unchanged.
                     for line in &lines[(i + 1)..=close_line_idx] {
                         result.push(line.to_string());

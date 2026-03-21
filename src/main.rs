@@ -4,6 +4,7 @@ use std::process;
 use clap::Parser;
 
 use embed_src::embed::process_file;
+use embed_src::ui;
 
 #[derive(Parser)]
 #[command(name = "embed-src", about = "Embed source files into any text file")]
@@ -32,31 +33,36 @@ fn main() {
         let result = match process_file(path) {
             Ok(r) => r,
             Err(e) => {
-                eprintln!("Error: {}", e);
+                ui::error(&e);
                 had_error = true;
                 continue;
             }
         };
 
         if result.original == result.processed {
+            if !cli.verify && !cli.dry_run {
+                ui::phase_ok(&format!("{} is up to date", file));
+            }
             continue;
         }
 
         needs_update = true;
 
         if cli.verify {
-            eprintln!("{} is out of date", file);
+            ui::warn(&format!("{} is out of date", file));
             continue;
         }
 
         if cli.dry_run {
-            eprintln!("{} would be updated", file);
+            ui::info(&format!("{} would be updated", file));
             continue;
         }
 
         if let Err(e) = std::fs::write(path, &result.processed) {
-            eprintln!("Error writing {}: {}", file, e);
+            ui::error(&format!("writing {}: {}", file, e));
             had_error = true;
+        } else {
+            ui::phase_ok(&format!("{} updated", file));
         }
     }
 
