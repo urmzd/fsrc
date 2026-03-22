@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.3.1 (2026-03-22)
+
+### Documentation
+
+- add showcase screenshot ([bd6144e](https://github.com/urmzd/embed-src/commit/bd6144eab7105a4f0ec7feda0286ff7117001f95))
+- add showcase section to README ([0c8c63b](https://github.com/urmzd/embed-src/commit/0c8c63b6d5abc72f6ecd58667c99b4dd363de56c))
+
+### Miscellaneous
+
+- **teasr**: restructure configuration with font and interaction support ([4e66225](https://github.com/urmzd/embed-src/commit/4e662256cddd597ad1eff2ff268068623d4f8624))
+
+[Full Changelog](https://github.com/urmzd/embed-src/compare/v3.3.0...v3.3.1)
+
+
 ## 3.3.0 (2026-03-21)
 
 ### Features
