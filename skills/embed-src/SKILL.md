@@ -1,7 +1,8 @@
 ---
 name: embed-src
 description: Embed source files into documents using comment markers. Use when syncing code snippets into README, docs, or any text file that references external source files.
-argument-hint: [files...]
+metadata:
+  argument-hint: [files...]
 ---
 
 # Embed Source Files
