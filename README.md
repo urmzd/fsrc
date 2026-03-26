@@ -212,11 +212,7 @@ Verify the file paths in `files` are relative to the repository root and that th
 
 This project ships an [Agent Skill](https://github.com/vercel-labs/skills) for use with Claude Code, Cursor, and other compatible agents.
 
-**Install:**
-
-```sh
-npx skills add urmzd/embed-src
-```
+Available as portable agent skills in [`skills/`](skills/).
 
 Once installed, use `/embed-src` to embed source files into documents using comment markers.
 
