@@ -4,53 +4,16 @@ dir = "./showcase"
 [[output.formats]]
 output_type = "png"
 
-[font]
-family = "MonaspiceNe Nerd Font"
-
 [[scenes]]
-type = "terminal"
+type = "markdown"
 name = "before"
-theme = "dracula"
-cwd = "showcase/demo"
-cols = 80
-rows = 18
-
-[[scenes.interactions]]
-type = "type"
-text = "cat README.md"
-speed = 50
-[[scenes.interactions]]
-type = "key"
-key = "enter"
-[[scenes.interactions]]
-type = "wait"
-duration = 2000
+path = "showcase/demo/README.md"
+theme = "dark"
+full_page = true
 
 [[scenes]]
-type = "terminal"
+type = "markdown"
 name = "showcase"
-theme = "dracula"
-cwd = "showcase/demo"
-cols = 80
-rows = 46
-
-[[scenes.interactions]]
-type = "type"
-text = "embed-src README.md"
-speed = 50
-[[scenes.interactions]]
-type = "key"
-key = "enter"
-[[scenes.interactions]]
-type = "wait"
-duration = 2000
-[[scenes.interactions]]
-type = "type"
-text = "cat README.md"
-speed = 50
-[[scenes.interactions]]
-type = "key"
-key = "enter"
-[[scenes.interactions]]
-type = "wait"
-duration = 2000
+path = "showcase/demo/README.after.md"
+theme = "dark"
+full_page = true
