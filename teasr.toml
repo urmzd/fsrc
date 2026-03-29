@@ -9,19 +9,48 @@ family = "MonaspiceNe Nerd Font"
 
 [[scenes]]
 type = "terminal"
-name = "embed-dry-run"
+name = "before"
 theme = "dracula"
-cwd = "."
-cols = 100
-rows = 40
+cwd = "showcase/demo"
+cols = 80
+rows = 18
 
 [[scenes.interactions]]
 type = "type"
-text = "embed-src --dry-run README.md"
+text = "cat README.md"
 speed = 50
 [[scenes.interactions]]
 type = "key"
 key = "enter"
 [[scenes.interactions]]
 type = "wait"
-duration = 5000
+duration = 2000
+
+[[scenes]]
+type = "terminal"
+name = "showcase"
+theme = "dracula"
+cwd = "showcase/demo"
+cols = 80
+rows = 46
+
+[[scenes.interactions]]
+type = "type"
+text = "embed-src README.md"
+speed = 50
+[[scenes.interactions]]
+type = "key"
+key = "enter"
+[[scenes.interactions]]
+type = "wait"
+duration = 2000
+[[scenes.interactions]]
+type = "type"
+text = "cat README.md"
+speed = 50
+[[scenes.interactions]]
+type = "key"
+key = "enter"
+[[scenes.interactions]]
+type = "wait"
+duration = 2000

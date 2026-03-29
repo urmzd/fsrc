@@ -17,9 +17,16 @@
 
 ## Showcase
 
-<p align="center">
-  <img src="showcase/embed-dry-run.png" alt="embed-src dry run demo" width="600">
-</p>
+<table align="center">
+  <tr>
+    <td align="center"><strong>Before</strong></td>
+    <td align="center"><strong>After</strong></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="showcase/before.png" alt="README with empty embed-src markers" width="400"></td>
+    <td align="center"><img src="showcase/showcase.png" alt="Running embed-src and the result" width="400"></td>
+  </tr>
+</table>
 
 ## Syntax
 
@@ -177,7 +184,7 @@ jobs:
 ### Multiple Files
 
 ```yaml
-- uses: urmzd/embed-src@v2
+- uses: urmzd/embed-src@v3
   with:
     files: "README.md docs/API.md docs/GUIDE.md"
 ```
@@ -187,7 +194,7 @@ jobs:
 Useful for CI validation -- embed the files and check for drift without committing:
 
 ```yaml
-- uses: urmzd/embed-src@v2
+- uses: urmzd/embed-src@v3
   with:
     commit-dry: "true"
     commit-push: "false"
