@@ -16,11 +16,11 @@ types:
   - name: docs
     section: Documentation
   - name: refactor
+    bump: patch
     section: Refactoring
   - name: revert
     section: Reverts
   - name: chore
-    bump: patch
   - name: ci
   - name: test
   - name: build

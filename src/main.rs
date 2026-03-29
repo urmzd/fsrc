@@ -20,10 +20,20 @@ struct Cli {
     /// Print what would change without modifying files
     #[arg(long)]
     dry_run: bool,
+
+    /// Write output to a file instead of modifying in place
+    #[arg(short, long)]
+    output: Option<String>,
 }
 
 fn main() {
     let cli = Cli::parse();
+
+    if cli.output.is_some() && cli.files.len() > 1 {
+        ui::error("--output can only be used with a single input file");
+        process::exit(2);
+    }
+
     let mut needs_update = false;
     let mut had_error = false;
 
@@ -58,11 +68,16 @@ fn main() {
             continue;
         }
 
-        if let Err(e) = std::fs::write(path, &result.processed) {
-            ui::error(&format!("writing {}: {}", file, e));
+        let dest = cli.output.as_deref().unwrap_or(file);
+        if let Err(e) = std::fs::write(dest, &result.processed) {
+            ui::error(&format!("writing {}: {}", dest, e));
             had_error = true;
         } else {
-            ui::phase_ok(&format!("{} updated", file));
+            if dest == file {
+                ui::phase_ok(&format!("{} updated", file));
+            } else {
+                ui::phase_ok(&format!("{} → {}", file, dest));
+            }
         }
     }
 

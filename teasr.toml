@@ -4,24 +4,16 @@ dir = "./showcase"
 [[output.formats]]
 output_type = "png"
 
-[font]
-family = "MonaspiceNe Nerd Font"
+[[scenes]]
+type = "markdown"
+name = "before"
+path = "showcase/demo/README.md"
+theme = "dark"
+full_page = true
 
 [[scenes]]
-type = "terminal"
-name = "embed-dry-run"
-theme = "dracula"
-cwd = "."
-cols = 100
-rows = 40
-
-[[scenes.interactions]]
-type = "type"
-text = "embed-src --dry-run README.md"
-speed = 50
-[[scenes.interactions]]
-type = "key"
-key = "enter"
-[[scenes.interactions]]
-type = "wait"
-duration = 5000
+type = "markdown"
+name = "showcase"
+path = "showcase/demo/README.after.md"
+theme = "dark"
+full_page = true
