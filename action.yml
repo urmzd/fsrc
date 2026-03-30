@@ -69,11 +69,13 @@ runs:
         esac
 
         BINARY_NAME="embed-src-${TARGET}"
-        DOWNLOAD_URL="https://github.com/${ES_REPO}/releases/download/${ES_REF}/${BINARY_NAME}"
+        BASE_URL="https://github.com/${ES_REPO}/releases/download/${ES_REF}"
 
         INSTALL_DIR="$HOME/.local/bin"
         mkdir -p "$INSTALL_DIR"
-        curl -sSfL "$DOWNLOAD_URL" -o "$INSTALL_DIR/embed-src"
+        curl -sSfL "${BASE_URL}/${BINARY_NAME}" -o "$INSTALL_DIR/embed-src"
+        curl -sSfL "${BASE_URL}/${BINARY_NAME}.sha256" -o "/tmp/embed-src.sha256"
+        (cd "$INSTALL_DIR" && sed "s/${BINARY_NAME}/embed-src/" /tmp/embed-src.sha256 | sha256sum -c -)
         chmod +x "$INSTALL_DIR/embed-src"
         echo "$INSTALL_DIR" >> "$GITHUB_PATH"
 
