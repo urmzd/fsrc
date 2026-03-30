@@ -1,5 +1,6 @@
 name: "embed-src"
 description: "A GitHub Action that embeds source files into any text file."
+author: "urmzd"
 branding:
   icon: "file"
   color: "gray-dark"
@@ -66,7 +67,15 @@ runs:
         esac
 
         BINARY_NAME="embed-src-${TARGET}"
-        DOWNLOAD_URL="https://github.com/urmzd/embed-src/releases/latest/download/${BINARY_NAME}"
+        # Derive the major version tag from this action's ref (e.g. v3.4.0 -> v3)
+        # Falls back to "latest" if the ref isn't a semver tag.
+        ACTION_REF="${GITHUB_ACTION_REF:-latest}"
+        if [[ "$ACTION_REF" =~ ^v([0-9]+) ]]; then
+          FLOAT_TAG="v${BASH_REMATCH[1]}"
+        else
+          FLOAT_TAG="latest"
+        fi
+        DOWNLOAD_URL="https://github.com/urmzd/embed-src/releases/download/${FLOAT_TAG}/${BINARY_NAME}"
 
         INSTALL_DIR="$HOME/.local/bin"
         mkdir -p "$INSTALL_DIR"
