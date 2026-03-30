@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.5.0 (2026-03-30)
+
+### Features
+
+- verify sha256 checksum after binary download ([58c9cc4](https://github.com/urmzd/embed-src/commit/58c9cc47c78de81c8c46211cb0e02c9f6e3e11a7))
+
+[Full Changelog](https://github.com/urmzd/embed-src/compare/v3.4.2...v3.5.0)
+
+
 ## 3.4.2 (2026-03-30)
 
 ### Bug Fixes
