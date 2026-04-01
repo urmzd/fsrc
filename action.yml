@@ -77,8 +77,9 @@ runs:
         API="https://api.github.com/repos/${ES_REPO}"
         echo "Resolving ref=${ES_REF} via ${API}"
 
+        # API calls use no auth — the repo is public and the caller's token
+        # may be scoped to a different repository (e.g. GitHub App tokens).
         RELEASE_TAG=$(curl -fsSL \
-          -H "Authorization: token $GH_TOKEN" \
           -H "Accept: application/vnd.github+json" \
           "${API}/releases/tags/${ES_REF}" 2>/dev/null \
           | grep '"tag_name"' | head -1 \
@@ -87,7 +88,6 @@ runs:
         if [ -z "$RELEASE_TAG" ]; then
           echo "No exact release for ref=${ES_REF}, searching by major version..."
           RELEASES=$(curl -fsSL \
-            -H "Authorization: token $GH_TOKEN" \
             -H "Accept: application/vnd.github+json" \
             "${API}/releases?per_page=20")
           MAJOR=$(echo "$ES_REF" | grep -oE '^v[0-9]+')
