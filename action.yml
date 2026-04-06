@@ -73,7 +73,7 @@ runs:
 
         # Resolve action ref to a release tag.
         # exact tag (v3.5.2) → prefix match (v3 → v3.x.x) → latest release
-        API="${GITHUB_API_URL:-https://api.github.com}/repos/${ES_REPO}"
+        API="https://api.github.com/repos/${ES_REPO}"
         TAGS=$(curl -fsSL "${API}/releases?per_page=100" | jq -r '.[].tag_name')
         RELEASE_TAG=$(echo "$TAGS" | grep -xF "$ES_REF" | head -1 || true)
         [ -z "$RELEASE_TAG" ] && RELEASE_TAG=$(echo "$TAGS" | grep "^${ES_REF}\." | head -1 || true)
@@ -85,7 +85,7 @@ runs:
         fi
         echo "Resolved ref=${ES_REF} → release=${RELEASE_TAG}"
 
-        URL="${GITHUB_SERVER_URL:-https://github.com}/${ES_REPO}/releases/download/${RELEASE_TAG}/${BINARY_NAME}"
+        URL="https://github.com/${ES_REPO}/releases/download/${RELEASE_TAG}/${BINARY_NAME}"
         echo "Downloading ${URL}"
         curl -fsSL "$URL" -o "$DEST"
         chmod +x "$DEST"
