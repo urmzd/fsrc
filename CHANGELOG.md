@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.5.3 (2026-04-06)
+
+### Refactoring
+
+- simplify release tag resolution in action ([2905939](https://github.com/urmzd/embed-src/commit/29059391941d36dd706f408eb5ffb80a6066d7bf))
+
+### Miscellaneous
+
+- add linguist overrides to fix language stats (#17) ([916f5da](https://github.com/urmzd/embed-src/commit/916f5da97bb5a3eeb5d4df1e1a704fa5595df979))
+- remove unused ui::header function (#16) ([403cf6c](https://github.com/urmzd/embed-src/commit/403cf6c3b8a517534fe4ceb1582b7d5f5e6a47e1))
+- **deps**: bump actions/create-github-app-token from 1 to 3 ([d069408](https://github.com/urmzd/embed-src/commit/d06940808662ea4dde2834aa8d57265f1b04bb6a))
+
+[Full Changelog](https://github.com/urmzd/embed-src/compare/v3.5.2...v3.5.3)
+
+
 ## 3.5.2 (2026-04-02)
 
 ### Bug Fixes
