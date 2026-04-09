@@ -64,8 +64,8 @@ jobs:
           TMPDIR=$(mktemp -d)
           cp tests/fixtures/sample.md "$TMPDIR/"
           cp tests/fixtures/example.rs "$TMPDIR/"
-          ./target/release/embed-src "$TMPDIR/sample.md"
+          ./target/release/embed-src run "$TMPDIR/sample.md"
           diff "$TMPDIR/sample.md" tests/fixtures/sample_expected.md
 
       - name: Verify README embeddings are current
-        run: ./target/release/embed-src --verify README.md
+        run: ./target/release/embed-src run --verify README.md
