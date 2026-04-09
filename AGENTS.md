@@ -31,9 +31,9 @@ Single Rust binary (not a workspace). Minimal dependencies: `clap` and `regex`.
 | Build | `cargo build --release` |
 | Test | `cargo test` |
 | Install | `cargo install --path .` |
-| Process files | `embed-src README.md docs/*.md` |
-| Verify (CI) | `embed-src --verify README.md` |
-| Dry run | `embed-src --dry-run README.md` |
+| Process files | `embed-src run README.md docs/*.md` |
+| Verify (CI) | `embed-src run --verify README.md` |
+| Dry run | `embed-src run --dry-run README.md` |
 
 ## Code Style
 

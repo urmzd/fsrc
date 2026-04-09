@@ -97,7 +97,7 @@ jobs:
         run: cargo build --release
 
       - name: Update README embeddings
-        run: ./target/release/embed-src README.md
+        run: ./target/release/embed-src run README.md
 
       - name: Stage generated files
         run: git add README.md action.yml example.yml
