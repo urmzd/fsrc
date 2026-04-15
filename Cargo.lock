@@ -9,19 +9,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "320119579fcad9c21884f5c4861d16174d0e06250625266f50fe6898340abefa"
 
 [[package]]
-name = "agentspec-update"
-version = "0.6.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "49b41cf13d5f1daaf731e67a34204d20c6c9d362256361a982787cb0a1f83399"
-dependencies = [
- "anyhow",
- "serde",
- "serde_json",
- "sha2",
- "ureq",
-]
-
-[[package]]
 name = "aho-corasick"
 version = "1.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -364,13 +351,17 @@ dependencies = [
 
 [[package]]
 name = "fsrc"
-version = "3.6.1"
+version = "4.0.0"
 dependencies = [
- "agentspec-update",
+ "anyhow",
  "clap",
  "crossterm",
  "indicatif",
  "regex",
+ "serde",
+ "serde_json",
+ "sha2",
+ "ureq",
 ]
 
 [[package]]

@@ -1,3 +1,5 @@
+mod self_update;
+
 use std::path::Path;
 use std::process;
 
@@ -60,11 +62,11 @@ fn main() {
         }
         Command::Update => {
             eprintln!("current version: {}", env!("CARGO_PKG_VERSION"));
-            match agentspec_update::self_update("urmzd/fsrc", env!("CARGO_PKG_VERSION"), "fsrc") {
-                Ok(agentspec_update::UpdateResult::AlreadyUpToDate) => {
+            match self_update::self_update("urmzd/fsrc", env!("CARGO_PKG_VERSION"), "fsrc") {
+                Ok(self_update::UpdateResult::AlreadyUpToDate) => {
                     eprintln!("already up to date")
                 }
-                Ok(agentspec_update::UpdateResult::Updated { from, to }) => {
+                Ok(self_update::UpdateResult::Updated { from, to }) => {
                     eprintln!("updated: {from} → {to}")
                 }
                 Err(e) => {
