@@ -32,7 +32,7 @@ type(scope): description
 
 Types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `ci`, `perf`
 
-Commits are enforced via [gitit](https://github.com/urmzd/gitit).
+Use [Conventional Commits](https://www.conventionalcommits.org/) format.
 
 ## Pull Requests
 

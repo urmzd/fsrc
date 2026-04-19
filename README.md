@@ -224,6 +224,6 @@ Available as portable agent skills in [`skills/`](skills/).
 
 Once installed, use `/fsrc` to embed source files into documents using comment markers.
 
-## Internal Use
+## License
 
-We use fsrc in our own CI/CD pipelines, ensuring our documentation is always synchronized with the latest code.
+Apache-2.0
