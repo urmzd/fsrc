@@ -96,6 +96,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      id-token: write
+    outputs:
+      released: ${{ steps.sr.outputs.released }}
+      tag: ${{ steps.sr.outputs.tag }}
     steps:
       - name: Generate app token
         id: app-token
@@ -119,9 +123,6 @@ jobs:
       - name: Update README embeddings
         run: ./target/release/fsrc run README.md
 
-      - name: Stage generated files
-        run: git add README.md action.yml example.yml Cargo.lock
-
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -136,39 +137,16 @@ jobs:
             chmod +x "release-assets/$target"
           done
 
-      - name: Release
-        id: sr
-        uses: urmzd/sr@v7
-        with:
-          github-token: ${{ steps.app-token.outputs.token }}
-          force: ${{ inputs.force }}
-          artifacts: "release-assets/*"
-
-    outputs:
-      released: ${{ steps.sr.outputs.released }}
-      tag: ${{ steps.sr.outputs.tag }}
-
-  publish:
-    needs: release
-    if: needs.release.outputs.released == 'true'
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ needs.release.outputs.tag }}
-
-      - uses: dtolnay/rust-toolchain@stable
-
-      - uses: Swatinem/rust-cache@v2
-
       - name: Authenticate with crates.io
         id: auth
         uses: rust-lang/crates-io-auth-action@v1
 
-      - name: Publish to crates.io
-        run: cargo publish
+      - name: Release
+        id: sr
+        uses: urmzd/sr@v7
         env:
           CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
+        with:
+          github-token: ${{ steps.app-token.outputs.token }}
+          force: ${{ inputs.force }}
+          artifacts: "release-assets/*"
