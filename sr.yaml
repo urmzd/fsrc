@@ -65,6 +65,8 @@ packages:
       - README.md
       - action.yml
       - example.yml
+    artifacts:
+      - release-assets/*
     hooks:
       post_release:
         - cargo publish
