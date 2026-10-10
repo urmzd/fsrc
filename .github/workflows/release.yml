@@ -85,6 +85,7 @@ jobs:
           path: target/${{ matrix.target }}/release/fsrc
 
   release:
+    environment: release
     name: Release
     needs: [plan, build]
     if: needs.plan.outputs.should-release == 'true'
