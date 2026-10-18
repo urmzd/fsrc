@@ -121,7 +121,7 @@ Installs the latest release to `$HOME/.local/bin` and adds it to your shell's `P
 | `FSRC_VERSION` | Version to install (e.g. `v3.1.1`) | latest |
 | `FSRC_INSTALL_DIR` | Installation directory | `$HOME/.local/bin` |
 
-**Example — pin a version:**
+**Example (pin a version):**
 ```sh
 FSRC_VERSION=v3.1.1 curl -fsSL https://raw.githubusercontent.com/urmzd/fsrc/main/install.sh | sh
 ```
@@ -130,11 +130,11 @@ FSRC_VERSION=v3.1.1 curl -fsSL https://raw.githubusercontent.com/urmzd/fsrc/main
 
 Download a pre-built binary for your platform from the [releases page](https://github.com/urmzd/fsrc/releases/latest) and place it somewhere on your `PATH`.
 
-> **Windows** — the script installer is not supported; use the manual download above.
+> **Windows**: the script installer is not supported; use the manual download above.
 
-## Local Usage
+## Quick Start
 
-The `fsrc` binary can also be used directly:
+Run the `fsrc` binary directly:
 
 ```bash
 # Process files in place
