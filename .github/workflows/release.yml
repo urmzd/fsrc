@@ -13,27 +13,39 @@ jobs:
   ci:
     uses: ./.github/workflows/ci.yml
 
-  plan:
-    name: Plan release
+  prepare:
+    name: Prepare release
     needs: ci
     runs-on: ubuntu-latest
     permissions:
       contents: read
     outputs:
-      should-release: ${{ steps.plan.outputs.bump != '' }}
+      should-release: ${{ steps.prepare.outputs.bump != '' }}
     steps:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - name: Check for releasable commits
-        id: plan
+      # Bump the manifests on disk before building, so the binaries report the
+      # version being released. Building the pushed commit as-is embeds the
+      # previous version, because sr only bumps it in the release job.
+      - name: Bump version files
+        id: prepare
         uses: urmzd/sr@v9
         with:
-          mode: plan
+          mode: prepare
+      - name: Upload prepared manifests
+        if: steps.prepare.outputs.bump != ''
+        uses: actions/upload-artifact@v7
+        with:
+          name: prepared-manifests
+          path: |
+            Cargo.toml
+            Cargo.lock
+            **/Cargo.toml
 
   build:
-    needs: plan
-    if: needs.plan.outputs.should-release == 'true'
+    needs: prepare
+    if: needs.prepare.outputs.should-release == 'true'
     name: Build (${{ matrix.target }})
     runs-on: ${{ matrix.runner }}
     strategy:
@@ -53,6 +65,11 @@ jobs:
             cross: false
     steps:
       - uses: actions/checkout@v7
+      - name: Apply prepared manifests
+        uses: actions/download-artifact@v8
+        with:
+          name: prepared-manifests
+          path: .
 
       - uses: dtolnay/rust-toolchain@stable
         with:
@@ -87,8 +104,8 @@ jobs:
   release:
     environment: release
     name: Release
-    needs: [plan, build]
-    if: needs.plan.outputs.should-release == 'true'
+    needs: [prepare, build]
+    if: needs.prepare.outputs.should-release == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: write
