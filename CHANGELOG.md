@@ -1,5 +1,22 @@
 # Changelog
 
+## 4.0.3 (2026-10-27)
+
+### Bug Fixes
+
+- **release**: build binaries from the bumped version (#25) ([1efdfd0](https://github.com/urmzd/fsrc/commit/1efdfd0a446f6a7707b74f7cab8b0bb170c899f6))
+
+### Misc
+
+- **readme**: align with fleet standard (#24) ([9e00355](https://github.com/urmzd/fsrc/commit/9e00355ec2668a58d6b90fd6b302a8434037fb5a))
+- **deps**: bump actions/checkout from 6 to 7 (#21) ([2e3f2a8](https://github.com/urmzd/fsrc/commit/2e3f2a8c380de2a8f594fb82c2899dbfc2437ff7))
+- **release**: read the sr-releaser key from the release environment (#23) ([9836ac2](https://github.com/urmzd/fsrc/commit/9836ac2bb0548881d9da465c9136a49a40cae243))
+- upgrade urmzd/sr action to v9 (#22) ([14eebaa](https://github.com/urmzd/fsrc/commit/14eebaa3c4a94157872d3a4d2f16047a5c92c968))
+- bump GitHub Actions to Node 24 majors and switch app token to client-id ([90f96f0](https://github.com/urmzd/fsrc/commit/90f96f035b380247857dc4bdaf024fef052a7906))
+
+[Full Changelog](https://github.com/urmzd/fsrc/compare/v4.0.2...v4.0.3)
+
+
 ## 4.0.2 (2026-05-25)
 
 ### Refactoring
