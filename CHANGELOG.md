@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.0.4 (2026-10-29)
+
+### Bug Fixes
+
+- **deps**: patch vulnerable dependencies (#26) ([7db016f](https://github.com/urmzd/fsrc/commit/7db016f69391a5e74b7e2f93e1662f469316da19))
+
+[Full Changelog](https://github.com/urmzd/fsrc/compare/v4.0.3...v4.0.4)
+
+
 ## 4.0.3 (2026-10-27)
 
 ### Bug Fixes
