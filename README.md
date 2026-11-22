@@ -20,6 +20,8 @@
 
 ## Showcase
 
+<p align="center"><img src="showcase/run.png" alt="fsrc run embedding files into a README" width="400"></p>
+
 <table align="center">
   <tr>
     <td align="center"><strong>Before</strong></td>
